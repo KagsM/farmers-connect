@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-//import { auth } from '../api/firebase';
-//import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../api/firebase';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from "react-router-dom";
-//import logo from '../assets/logo.svg';
-//import defaultuser from '../assets/default-user.png';
+import logo from '../assets/logo.svg';
+import defaultuser from '../assets/default-user.png';
 import '../styles/components.css';
 
 function Header() {

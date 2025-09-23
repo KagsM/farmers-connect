@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import '../styles/components.css';
-//import logoGreen from '../assets/logo-green.svg';
+import logoGreen from '../assets/logo-green.svg';
 import Sidebar from '../components/sidebar';
 
 function Home() {

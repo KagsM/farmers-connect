@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-//import { auth } from "../api/firebase";
-//import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../api/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ children }) {
