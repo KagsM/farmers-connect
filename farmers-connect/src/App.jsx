@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import Header from "./components/Header.jsx";
+import Home from "./pages/Home.jsx";
+import MarketPlace from "./pages/Buyers.jsx";
+import FarmersHub from "./pages/Farmers.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
+import SeasonalPlanner from './components/SeasonalPlanner';
+import "./styles/App.css";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <div className="App-container">
+            <Router>
+                <Header />
+                <Routes>
+                    <Route path="/home" element={
+                        <ProtectedRoute>
+                            <Home />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/marketplace" element={
+                        <ProtectedRoute>
+                            <MarketPlace />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/farmers-hub" element={
+                        <ProtectedRoute>
+                            <FarmersHub />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/planner" element={
+                        <ProtectedRoute>
+                            <SeasonalPlanner />
+                        </ProtectedRoute>
+                    } />
+                </Routes>
+            </Router>
+        </div>
+    )
 }
 
-export default App
+export default App;
+// This code sets up a React application with protected routing using React Router.
