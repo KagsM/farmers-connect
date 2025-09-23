@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ProductCard from "../components/ProductCard";
-import ProductSidebar from "../components/ProductSidebar";
+//import ProductCard from "../components/productCard";
+//import ProductSidebar from "../components/productSidebar";
 import '../styles/components.css';
-import { db, ref, onValue } from "../api/firebase";
+//import { db, ref, onValue } from "../api/firebase";
 
 function Marketplace() {
     const [products, setProducts] = useState([]);

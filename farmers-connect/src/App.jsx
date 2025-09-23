@@ -1,14 +1,14 @@
 import React from "react";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import Header from "./components/Header.jsx";
-import Home from "./pages/Home.jsx";
-import MarketPlace from "./pages/Buyers.jsx";
-import FarmersHub from "./pages/Farmers.jsx";
-import Login from "./pages/Login.jsx";
-import Register from "./pages/Register.jsx";
-import SeasonalPlanner from './components/SeasonalPlanner';
-import "./styles/App.css";
-import ProtectedRoute from "./components/ProtectedRoute";
+import Header from "./components/header.jsx";
+import Home from "./pages/home.jsx";
+import MarketPlace from "./pages/buyers.jsx";
+import FarmersHub from "./pages/farmers.jsx";
+import Login from "./pages/login.jsx";
+import Register from "./pages/register.jsx";
+import SeasonalPlanner from './components/seasonalPlanner';
+import "./styles/app.css";
+import ProtectedRoute from "./components/protectedRoute";
 
 function App() {
     return (

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import FarmersSearchBar from "../components/FarmersSearchBar";
-import ProductForm from "../components/ProductForm";
-import FarmersCard from "../components/FarmersCard";
-import Sidebar from "../components/Sidebar";
-import { db, ref, onValue, remove, update } from "../api/firebase";
-import { auth } from "../api/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+//import FarmersSearchBar from "../components/FarmersSearchBar";
+//import ProductForm from "../components/ProductForm";
+//import FarmersCard from "../components/FarmersCard";
+import Sidebar from "../components/sidebar";
+//import { db, ref, onValue, remove, update } from "../api/firebase";
+//import { auth } from "../api/firebase";
+//import { onAuthStateChanged } from "firebase/auth";
 
 function FarmersHub() {
   const [products, setProducts] = useState([]);
