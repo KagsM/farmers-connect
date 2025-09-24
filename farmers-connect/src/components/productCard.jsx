@@ -1,57 +1,105 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+// import '../styles/components.css';
+// import img from '../assets/logo.svg';
+
+// function ProductCard({ product }) {
+//   const { 
+//     name,
+//     description, 
+//     price, 
+//     quantity, 
+//     location, 
+//     image, 
+//     postedBy, 
+//     contact,
+//     unit, 
+//   } = product;
+  
+//   const [showContact, setShowContact] = useState(false);
+
+//   // Toggle contact information visibility
+//   function toggleContact() {
+//     setShowContact(!showContact);
+//   }
+
+//   return (
+//     <div className="product-card">
+//       <img src={image || img} alt={name} />
+//       <h3>{name} </h3>
+//       <div className='price-quantity'>
+//         <p className='price'>Ksh {Number(price).toFixed(2)} <span className='unit'>/{unit}</span></p>
+//         <p className='unit'>Quantity: {quantity}</p>
+//       </div>
+//       <p>{description} </p>
+//       <div className='product-details'>
+//         <p><strong>Location:</strong> {location}</p>
+//         <p><strong>Posted by:</strong> {postedBy}</p>
+//         {product.verified && <span className="verified-badge">✔ Verified Farmer</span>}
+//       </div>
+//       <div className="product-card-actions">
+//         <button 
+//           onClick={toggleContact}
+//           className="contact-button"
+//         >
+//           {showContact ? 'Hide Contact' : 'Contact Seller'}
+//         </button>
+        
+//         {showContact && (
+//           <div className="contact-info">
+//             <p>Contact: {contact || 'Not available'}</p>
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default ProductCard;
+
+import React from "react";
 import '../styles/components.css';
 import img from '../assets/logo.svg';
 
-function ProductCard({ product }) {
-  const { 
-    name,
-    description, 
-    price, 
-    quantity, 
-    location, 
-    image, 
-    postedBy, 
-    contact,
-    unit, 
-  } = product;
-  
-  const [showContact, setShowContact] = useState(false);
+function ProductCard({ product, inCart, onAddToCart, onRemoveFromCart }) {
+    const {
+        name,
+        description,
+        price,
+        quantity,
+        location,
+        image,
+        unit,
+    } = product;
 
-  // Toggle contact information visibility
-  function toggleContact() {
-    setShowContact(!showContact);
-  }
+    return (
+        <div className="product-card">
+            <img src={image || img} alt={name} />
+            <h3>{name}</h3>
 
-  return (
-    <div className="product-card">
-      <img src={image || img} alt={name} />
-      <h3>{name} </h3>
-      <div className='price-quantity'>
-        <p className='price'>Ksh {Number(price).toFixed(2)} <span className='unit'>/{unit}</span></p>
-        <p className='unit'>Quantity: {quantity}</p>
-      </div>
-      <p>{description} </p>
-      <div className='product-details'>
-        <p><strong>Location:</strong> {location}</p>
-        <p><strong>Posted by:</strong> {postedBy}</p>
-        {product.verified && <span className="verified-badge">✔ Verified Farmer</span>}
-      </div>
-      <div className="product-card-actions">
-        <button 
-          onClick={toggleContact}
-          className="contact-button"
-        >
-          {showContact ? 'Hide Contact' : 'Contact Seller'}
-        </button>
-        
-        {showContact && (
-          <div className="contact-info">
-            <p>Contact: {contact || 'Not available'}</p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+            <div className="price-quantity">
+                <p className="price">Ksh {Number(price).toFixed(2)} <span className="unit">/{unit}</span></p>
+                <p className="unit">Quantity: {quantity}</p>
+            </div>
+
+            <p>{description}</p>
+            <div className="product-details">
+                <p><strong>Location:</strong> {location}</p>
+            </div>
+
+            <div className="product-card-actions">
+                {/* ✅ Cart toggle */}
+                {inCart ? (
+                    <button onClick={() => onRemoveFromCart(product)} className="remove-cart">
+                        Remove from Cart
+                    </button>
+                ) : (
+                    <button onClick={() => onAddToCart(product)} className="add-cart">
+                        Add to Cart
+                    </button>
+                )}
+            </div>
+        </div>
+    );
 }
 
 export default ProductCard;
