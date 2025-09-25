@@ -110,7 +110,7 @@
 .sidebar {
     flex-basis: 20%;
     flex-grow: 0.01;      /* Allows sidebar to grow if space is available */
-    background-color: #4c4c4c;
+    background-color: #f0fbeb;
     padding: 20px;
     border-radius: 20px;
 }
@@ -125,7 +125,7 @@
 
 hr {
     border: none;
-    background-color: #E5F3DF;
+    background-color: #0ac063;
     height: 3px;
 }
 

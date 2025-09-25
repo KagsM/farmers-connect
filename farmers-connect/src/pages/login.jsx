@@ -32,17 +32,17 @@ function Login() {
         setLoading(false);
     };
 
-    const handleGoogleLogin = async () => {
-        setLoading(true);
-        setError("");
-        try {
-            await signInWithPopup(auth, googleProvider);
-            navigate("/home"); // Redirect to home after successful Google login
-        } catch (err) {
-            setError(err.message);
-        }
-        setLoading(false);
-    };
+    // const handleGoogleLogin = async () => {
+    //     setLoading(true);
+    //     setError("");
+    //     try {
+    //         await signInWithPopup(auth, googleProvider);
+    //         navigate("/home"); // Redirect to home after successful Google login
+    //     } catch (err) {
+    //         setError(err.message);
+    //     }
+    //     setLoading(false);
+    // };
 
     return (
         <div className="login-container">
@@ -66,7 +66,7 @@ function Login() {
                 <button type="submit" disabled={loading}>
                     {loading ? "Logging in..." : "Login"}
                 </button>
-                <button
+                {/* <button
                     type="button"
                     className="google-btn"
                     onClick={handleGoogleLogin}
@@ -74,7 +74,7 @@ function Login() {
                     style={{ marginTop: "10px" }}
                 >
                     {loading ? "Processing..." : "Login with Google"}
-                </button>
+                </button> */}
                 {error && <p className="error">{error}</p>}
             </form>
             <h4>

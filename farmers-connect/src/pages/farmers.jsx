@@ -31,7 +31,7 @@ function FarmersHub() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const res = await fetch("http://127.0.0.1:5000/inventory");
+        const res = await fetch("http://127.0.0.1:5000/api/products");
         const data = await res.json();
         setProducts(data);
       } catch (err) {
@@ -64,7 +64,7 @@ function FarmersHub() {
   // ✅ Add product → POST to Flask API
   async function handleAddProduct(formData) {
     try {
-      const response = await fetch("http://127.0.0.1:5000/inventory", {
+      const response = await fetch("http://127.0.0.1:5000/api/products", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -88,7 +88,7 @@ function FarmersHub() {
   // ✅ Update product → PUT request
   async function handleUpdateProduct(updatedProduct) {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/inventory/${updatedProduct.id}`, {
+      const response = await fetch(`http://127.0.0.1:5000/api/products/${updatedProduct.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedProduct),
@@ -109,7 +109,7 @@ function FarmersHub() {
   // ✅ Delete product → DELETE request
   async function handleDeleteProduct(id) {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/inventory/${id}`, {
+      const response = await fetch(`http://127.0.0.1:5000/api/products/${id}`, {
         method: "DELETE",
       });
 
