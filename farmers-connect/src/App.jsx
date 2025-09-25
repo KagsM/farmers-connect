@@ -17,26 +17,26 @@ function App() {
                 <Header />
                 <Routes>
                     <Route path="/home" element={
-                        //<ProtectedRoute>
+                        <ProtectedRoute>
                             <Home />
-                        //</ProtectedRoute>
+                        </ProtectedRoute>
                     } />
                     <Route path="/marketplace" element={
-                        //<ProtectedRoute>
+                        <ProtectedRoute>
                             <MarketPlace />
-                        //</ProtectedRoute>
+                        </ProtectedRoute>
                     } />
                     <Route path="/farmers-hub" element={
-                        //<ProtectedRoute>
+                        <ProtectedRoute>
                             <FarmersHub />
-                        //</ProtectedRoute>
+                        </ProtectedRoute>
                     } />
                     <Route path="/" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/planner" element={
-                        //<ProtectedRoute>
+                        <ProtectedRoute>
                             <SeasonalPlanner />
-                        //</ProtectedRoute>
+                        </ProtectedRoute>
                     } />
                 </Routes>
             </Router>
