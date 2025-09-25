@@ -16,7 +16,7 @@ function ProductForm({ initialData = null, onSubmit, onCancel }) {
   const [loading, setLoading] = useState(false);
   const [verified, setVerified] = useState(false);
 
-  // Prefill when editing
+  // Prefill form when editing
   useEffect(() => {
     if (initialData) {
       setId(initialData.id || "");
@@ -30,8 +30,20 @@ function ProductForm({ initialData = null, onSubmit, onCancel }) {
       setImageUrl(initialData.image_url || ""); 
       setContact(initialData.contact_info || "");
       setVerified(initialData.verified || false);
+      setImageFile(null); // reset any previous selected file
+    } else {
+      resetForm();
     }
   }, [initialData]);
+
+  // Cleanup preview object URL
+  useEffect(() => {
+    return () => {
+      if (imageUrl && imageFile) {
+        URL.revokeObjectURL(imageUrl);
+      }
+    };
+  }, [imageUrl, imageFile]);
 
   // Cloudinary setup
   const CLOUDINARY_UPLOAD_PRESET = "Farmers-Connect";
@@ -46,6 +58,21 @@ function ProductForm({ initialData = null, onSubmit, onCancel }) {
     const res = await fetch(url, { method: "POST", body: formData });
     const data = await res.json();
     return data.secure_url;
+  }
+
+  function resetForm() {
+    setId("");
+    setProductName("");
+    setCategory("General");
+    setPrice("");
+    setQuantity("");
+    setUnit("");
+    setLocation("");
+    setDescription("");
+    setImageFile(null);
+    setImageUrl("");
+    setContact("");
+    setVerified(false);
   }
 
   async function handleSubmit(e) {
@@ -124,6 +151,12 @@ function ProductForm({ initialData = null, onSubmit, onCancel }) {
       );
 
       if (onSubmit) onSubmit(savedProduct);
+
+      // Reset form if creating new product
+      if (!initialData) {
+        resetForm();
+      }
+
     } catch (err) {
       alert("Error saving product: " + err.message);
     }
@@ -238,10 +271,14 @@ function ProductForm({ initialData = null, onSubmit, onCancel }) {
         <input
           type="file"
           accept="image/*"
-          onChange={(e) => setImageFile(e.target.files[0])}
+          onChange={(e) => {
+            const file = e.target.files[0];
+            setImageFile(file);
+            if (file) setImageUrl(URL.createObjectURL(file));
+          }}
         />
-        {imageUrl && !imageFile && (
-          <img src={imageUrl} alt="Current" style={{ width: 80, marginTop: 8 }} />
+        {imageUrl && (
+          <img src={imageUrl} alt="Preview" style={{ width: 80, marginTop: 8 }} />
         )}
       </div>
 
@@ -256,7 +293,14 @@ function ProductForm({ initialData = null, onSubmit, onCancel }) {
       </button>
 
       {initialData && (
-        <button type="button" onClick={onCancel} style={{ marginLeft: 10 }}>
+        <button
+          type="button"
+          onClick={() => {
+            if (onCancel) onCancel();
+            resetForm();
+          }}
+          style={{ marginLeft: 10 }}
+        >
           Cancel
         </button>
       )}

@@ -39,40 +39,45 @@ function Farmers() {
 
   const handleSubmit = (savedProduct) => {
     if (editingProduct) {
-      // update existing
       setProducts((prev) =>
         prev.map((p) => (p.id === savedProduct.id ? savedProduct : p))
       );
       setEditingProduct(null);
     } else {
-      // add new
       setProducts((prev) => [...prev, savedProduct]);
     }
   };
 
   return (
-    <div className="farmers-page">
-      <h1>Farmer's Hub</h1>
+    <div className="farmers-page" style={{ display: "flex" }}>
+      {/* Sidebar */}
+      <Sidebar />
 
-      <ProductForm
-        initialData={editingProduct}
-        onSubmit={handleSubmit}
-        onCancel={() => setEditingProduct(null)}
-      />
+      <div className="farmers-content" style={{ flex: 1, padding: "0 20px" }}>
+        <h1>Farmer's Hub</h1>
 
-      <div className="product-list">
-        {products.length === 0 ? (
-          <p>No products available.</p>
-        ) : (
-          products.map((product) => (
-            <FarmersCard
-              key={product.id}
-              product={product}
-              onEdit={() => handleEdit(product)}
-              onDelete={() => handleDelete(product.id)}
-            />
-          ))
-        )}
+        <ProductForm
+          initialData={editingProduct}
+          onSubmit={handleSubmit}
+          onCancel={() => setEditingProduct(null)}
+        />
+
+        <FarmersSearchBar />
+
+        <div className="product-list">
+          {products.length === 0 ? (
+            <p>No products available.</p>
+          ) : (
+            products.map((product) => (
+              <FarmersCard
+                key={product.id}
+                product={product}
+                onEdit={() => handleEdit(product)}
+                onDelete={() => handleDelete(product.id)}
+              />
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
