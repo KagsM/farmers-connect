@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { auth } from "../api/firebase"; // still needed to grab logged-in user
+import { auth } from "../api/firebase"; 
 
 function ProductForm({ initialData = null, onSubmit, onCancel }) {
   const [id, setId] = useState(initialData ? initialData.id : "");
@@ -27,7 +27,7 @@ function ProductForm({ initialData = null, onSubmit, onCancel }) {
       setUnit(initialData.unit || "");
       setLocation(initialData.location || "");
       setDescription(initialData.description || "");
-      setImageUrl(initialData.image || "");
+      setImageUrl(initialData.image_url || ""); 
       setContact(initialData.contact_info || "");
       setVerified(initialData.verified || false);
     }
@@ -43,10 +43,7 @@ function ProductForm({ initialData = null, onSubmit, onCancel }) {
     formData.append("file", file);
     formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
 
-    const res = await fetch(url, {
-      method: "POST",
-      body: formData,
-    });
+    const res = await fetch(url, { method: "POST", body: formData });
     const data = await res.json();
     return data.secure_url;
   }
@@ -93,8 +90,9 @@ function ProductForm({ initialData = null, onSubmit, onCancel }) {
       unit: unit.trim(),
       location: location.trim(),
       description: description.trim(),
-      image: finalImageUrl,
+      image_url: finalImageUrl,
       contact_info: contact.trim(),
+      posted_by: postedBy,
     };
 
     try {

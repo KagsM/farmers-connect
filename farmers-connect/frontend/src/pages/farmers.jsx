@@ -1,41 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FarmersSearchBar from "../components/farmersSearchBar";
 import ProductForm from "../components/productForm";
 import FarmersCard from "../components/farmersCard";
 import Sidebar from "../components/sidebar";
-import { auth } from "../api/firebase"; 
-import { onAuthStateChanged } from "firebase/auth";
 
-function FarmersHub() {
+function Farmers() {
   const [products, setProducts] = useState([]);
-  const [filtered, setFiltered] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
-  const [searchText, setSearchText] = useState("");
-  const [user, setUser] = useState(null);
-  const [userProfile, setUserProfile] = useState(null);
 
-  // Track current user (still needed for posting)
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser);
-      if (firebaseUser) {
-        setUserProfile({ email: firebaseUser.email, verified: true });
-      } else {
-        setUserProfile(null);
-      }
-    });
-    return () => unsubscribe();
-  }, []);
-
-  // Fetch products from Flask API
+  // Fetch products from backend
   useEffect(() => {
     async function fetchProducts() {
       try {
         const res = await fetch("http://127.0.0.1:5000/api/products");
         const data = await res.json();
-        console.log("Fetched products:", data); // debug
         setProducts(data);
-        setFiltered(data); // show all
       } catch (err) {
         console.error("Error fetching products:", err);
       }
@@ -43,124 +22,60 @@ function FarmersHub() {
     fetchProducts();
   }, []);
 
-  // Apply search filter
-  useEffect(() => {
-    let updated = [...products];
+  const handleEdit = (product) => {
+    setEditingProduct(product);
+  };
 
-    if (searchText) {
-      updated = updated.filter(product =>
-        product.product_name.toLowerCase().includes(searchText.toLowerCase()) ||
-        (product.location && product.location.toLowerCase().includes(searchText.toLowerCase()))
-      );
-    }
-
-    setFiltered(updated);
-  }, [searchText, products]);
-
-  // Add product → POST
-  async function handleAddProduct(formData) {
+  const handleDelete = async (id) => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/products", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        alert("Failed to add product. Please try again.");
-        return;
-      }
-
-      const newProduct = await response.json();
-      alert("Product added successfully!");
-      setProducts((prev) => [...prev, newProduct]);
-      setEditingProduct(null);
-    } catch (error) {
-      console.error("Error adding product:", error);
-      alert("An error occurred. Please try again.");
-    }
-  }
-
-  // Update product → PUT
-  async function handleUpdateProduct(updatedProduct) {
-    try {
-      const response = await fetch(`http://127.0.0.1:5000/api/products/${updatedProduct.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedProduct),
-      });
-
-      if (!response.ok) throw new Error("Failed to update product");
-
-      const data = await response.json();
-      setProducts((prev) =>
-        prev.map((p) => (p.id === data.id ? data : p))
-      );
-      setEditingProduct(null);
-    } catch (error) {
-      console.error("Error updating product:", error);
-    }
-  }
-
-  // Delete product → DELETE
-  async function handleDeleteProduct(id) {
-    try {
-      const response = await fetch(`http://127.0.0.1:5000/api/products/${id}`, {
+      await fetch(`http://127.0.0.1:5000/api/products/${id}`, {
         method: "DELETE",
       });
-
-      if (!response.ok) throw new Error("Failed to delete product");
-
       setProducts((prev) => prev.filter((p) => p.id !== id));
-    } catch (error) {
-      console.error("Error deleting product:", error);
+    } catch (err) {
+      console.error("Error deleting product:", err);
     }
-  }
+  };
+
+  const handleSubmit = (savedProduct) => {
+    if (editingProduct) {
+      // update existing
+      setProducts((prev) =>
+        prev.map((p) => (p.id === savedProduct.id ? savedProduct : p))
+      );
+      setEditingProduct(null);
+    } else {
+      // add new
+      setProducts((prev) => [...prev, savedProduct]);
+    }
+  };
 
   return (
-    <div className="home-container">
-      <Sidebar />
-      <div className="main-content">
-        <h1> Welcome to the Farmers Hub! </h1>
-        <p> Post your products here and connect with buyers across the country. </p>
-        <p> To join our community of verified and trusted farmers, email us at verifyme@farmershub.com </p>
-        
-        {!editingProduct && (
-          <ProductForm onSubmit={handleAddProduct} />
+    <div className="farmers-page">
+      <h1>Farmer's Hub</h1>
+
+      <ProductForm
+        initialData={editingProduct}
+        onSubmit={handleSubmit}
+        onCancel={() => setEditingProduct(null)}
+      />
+
+      <div className="product-list">
+        {products.length === 0 ? (
+          <p>No products available.</p>
+        ) : (
+          products.map((product) => (
+            <FarmersCard
+              key={product.id}
+              product={product}
+              onEdit={() => handleEdit(product)}
+              onDelete={() => handleDelete(product.id)}
+            />
+          ))
         )}
-
-        <h1>All Farmers’ Products</h1>
-        <FarmersSearchBar
-          products={products}
-          onSearch={setSearchText}
-        />
-
-        <div className="farmer-product-grid">
-          {filtered.length === 0 ? (
-            <p>No products found.</p>
-          ) : (
-            filtered.map((product) =>
-              editingProduct && editingProduct.id === product.id ? (
-                <ProductForm
-                  key={product.id}
-                  initialData={editingProduct}
-                  onSubmit={handleUpdateProduct}
-                  onCancel={() => setEditingProduct(null)}
-                />
-              ) : (
-                <FarmersCard
-                  key={product.id}
-                  product={product}
-                  onDelete={() => handleDeleteProduct(product.id)}
-                  onEdit={() => setEditingProduct(product)}
-                />
-              )
-            )
-          )}
-        </div>
       </div>
     </div>
   );
 }
 
-export default FarmersHub;
+export default Farmers;
