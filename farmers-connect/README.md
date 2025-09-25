@@ -2,37 +2,34 @@
 - Farmers Connect is a full-stack web application that connects **farmers** and **buyers**. Its built with **Flask(PYTHON)** for backend API and **React.js** for the frontend User interface.
 
 ## Project Structure
-farmers-connect/
-│
-├── backend/                  # Flask backend
-│   ├── app.py                # Flask app entry point
-│   ├── farmers_inventory.db  # SQLite database (auto-created)
-│   ├── logic/                # Core backend logic
-│   │   ├── __init__.py
-│   │   ├── extensions.py     # DB + Marshmallow setup
-│   │   ├── models.py         # Database models (SQLAlchemy)
-│   │   ├── routes.py         # API routes (CRUD for products)
-│   │   └── schemas.py        # Marshmallow schemas
-│   ├── migrations/           # Database migrations (Flask-Migrate)
-│   └── var/                  # (optional storage)
-│
-├── src/                      # React frontend
-│   ├── api/                  # Firebase/Backend API setup
-│   ├── assets/               # Images and static files
-│   ├── components/           # Reusable React components
-│   ├── pages/                # Page-level React components
-│   ├── styles/               # CSS styling
-│   ├── App.jsx               # Root React component
-│   ├── main.jsx              # React entry point
-│   └── index.html
-│
-├── public/                   # Public frontend assets
-├── .gitignore
-└── README.md                 # Project documentation
+- farmers-connect/
+- backend/                  # Flask backend
+- app.py                # Flask app entry point
+- farmers_inventory.db  # SQLite database (auto-created)
+- logic/                # Core backend logic
+- __init__.py
+- extensions.py     # DB + Marshmallow setup
+- models.py         # Database models (SQLAlchemy)
+- routes.py         # API routes (CRUD for products)
+- schemas.py        # Marshmallow schemas
+- migrations           # Database migrations (Flask-Migrate)
+- var                  # (optional storage)
+- src/                      # React frontend
+- api/                  # Firebase/Backend API setup
+- assets/               # Images and static files
+- components/           # Reusable React components
+- pages/                # Page-level React components
+- styles/               # CSS styling
+- App.jsx               # Root React component
+- main.jsx              # React entry point
+- index.html
+- public/                   # Public frontend assets
+- .gitignore
+- README.md                 # Project documentation
 ## Getting Started
 ### Clone the repository
 - Fork the repository to your local workspace.
-- bash: git clone https://github.com/<your-username>/farmers-connect.git
+- bash: git clone https://github.com/your-username/farmers-connect.git
 - cd farmers-connect
 - You will have two main directories: `backend/` for Flask and `src/` for React.
 
