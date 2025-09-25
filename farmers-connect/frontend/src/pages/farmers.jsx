@@ -49,22 +49,20 @@ function Farmers() {
   };
 
   return (
-    <div className="farmers-page" style={{ display: "flex" }}>
-      {/* Sidebar */}
+    <div className="home-container">
       <Sidebar />
-
-      <div className="farmers-content" style={{ flex: 1, padding: "0 20px" }}>
-        <h1>Farmer's Hub</h1>
-
-        <ProductForm
+      <div className="main-content">
+        <h1> Welcome to the Farmers Hub! </h1>
+        <p> Post your products here and connect with buyers across the country. </p>
+        <p> To join our community of verified and trusted farmers, email us at verifyme@farmershub.com </p>
+         <ProductForm
           initialData={editingProduct}
           onSubmit={handleSubmit}
           onCancel={() => setEditingProduct(null)}
         />
-
-        <FarmersSearchBar />
-
-        <div className="product-list">
+        <h1>Your Products</h1>
+        <div className="farmer-product-grid">
+          <div className="product-list">
           {products.length === 0 ? (
             <p>No products available.</p>
           ) : (
@@ -75,9 +73,11 @@ function Farmers() {
                 onEdit={() => handleEdit(product)}
                 onDelete={() => handleDelete(product.id)}
               />
-            ))
+              )
+            )
           )}
         </div>
+      </div>
       </div>
     </div>
   );
