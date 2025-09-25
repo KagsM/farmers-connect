@@ -113,5 +113,8 @@ useEffect(() => {
 - Image uploads with Cloudinary/Firebase Storage
 - Integrating payment systems.
 
+## License
+This project is protected by MIT license thereby all rules, regulations and copyright laws under this ACT to be followed.
+
 ## Author
-Built with by **Edward Karogo** in collaboration with **Malcolm Kablogonya**
+Built by **Edward Karogo** in collaboration with **Malcolm Kablogonya**
