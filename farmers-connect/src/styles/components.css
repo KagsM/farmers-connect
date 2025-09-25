@@ -110,20 +110,22 @@
 .sidebar {
     flex-basis: 20%;
     flex-grow: 0.01;      /* Allows sidebar to grow if space is available */
-    background-color: #7ed9571e;
+    background-color: #4c4c4c;
     padding: 20px;
+    border-radius: 20px;
 }
 .main-content {
     flex-basis: 80%;
     flex-grow: 3;      /* Main content grows more than sidebar */
-    background-color: #f9f9f9;
+    background-color: #DAFFDE;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
 }
 
 hr {
     border: none;
-    background-color: #00BF63;
+    background-color: #E5F3DF;
     height: 3px;
 }
 
@@ -133,7 +135,7 @@ hr {
     margin-bottom: 20px;
 }
 .homepage-query {
-    background-color: white;
+    background-color: #E9FFCD;
     padding: 50px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -142,10 +144,11 @@ hr {
     gap: 10px;
     margin-top: 30px;
     margin-bottom: 30px;
+    border-radius: 20px;
 }
 
 .homepage-query h3 {
-    color: #7ED957;
+    color: #55C227;
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 20px;
