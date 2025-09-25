@@ -28,18 +28,18 @@ function Register() {
         setLoading(false);
     };
 
-    const handleGoogleSignup = async () => {
-        setLoading(true);
-        setError("");
-        try {
-            await signInWithPopup(auth, googleProvider);
-            setSuccess(true);
-            navigate("/"); // Redirect to login page after successful Google signup
-        } catch (err) {
-            setError(err.message);
-        }
-        setLoading(false);
-    };
+    // const handleGoogleSignup = async () => {
+    //     setLoading(true);
+    //     setError("");
+    //     try {
+    //         await signInWithPopup(auth, googleProvider);
+    //         setSuccess(true);
+    //         navigate("/"); // Redirect to login page after successful Google signup
+    //     } catch (err) {
+    //         setError(err.message);
+    //     }
+    //     setLoading(false);
+    // };
 
     return (
         <div className="register-container">
@@ -63,7 +63,7 @@ function Register() {
                 <button type="submit" disabled={loading}>
                     {loading ? "Registering..." : "Register"}
                 </button>
-                <button
+                {/* <button
                     type="button"
                     className="google-btn"
                     onClick={handleGoogleSignup}
@@ -71,7 +71,7 @@ function Register() {
                     style={{ marginTop: "10px" }}
                 >
                     {loading ? "Processing..." : "Sign up with Google"}
-                </button>
+                </button> */}
                 {error && <p className="error">{error}</p>}
                 {success && <p className="success">Registration successful!</p>}
             </form>
