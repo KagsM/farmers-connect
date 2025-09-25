@@ -117,4 +117,4 @@ useEffect(() => {
 This project is protected by MIT license thereby all rules, regulations and copyright laws under this ACT to be followed.
 
 ## Author
-Built by **Edward Karogo** in collaboration with **Malcolm Kablogonya**
+Built by **Edward Karogo** in collaboration with **Malcolm Kagolobya**
