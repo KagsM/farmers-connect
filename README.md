@@ -29,7 +29,7 @@
 ## Getting Started
 ### Clone the repository
 - Fork the repository to your local workspace.
-- bash: git clone https://github.com/your-username/farmers-connect.git
+- bash: git clone git@github.com:KagsM/farmers-connect.git
 - cd farmers-connect
 - You will have two main directories: `backend/` for Flask and `src/` for React.
 
