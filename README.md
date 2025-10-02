@@ -31,7 +31,7 @@
 - Fork the repository to your local workspace.
 - bash: git clone git@github.com:KagsM/farmers-connect.git
 - cd farmers-connect
-- You will have two main directories: `backend/` for Flask and `src/` for React.
+- You will have two main directories: `backend/` for Flask and `frontend/` for React.
 
 ## Backend Setup(Flask API)
 ### Requirements
